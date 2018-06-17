@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Upload Receipt</title>
+</head>
+<body>
+	<div>
+		<form method="POST" action="/upload" enctype="multipart/form-data">
+			<table>
+				<tr>
+					<td>File to upload:</td>
+					<td><input type="file" name="file" /></td>
+				</tr>
+				<tr>
+					<td>Category:</td>
+					<td><select name="category">
+							<option value="grocery">Grocery</option>
+							<option value="restaurants">Restaurants</option>
+							<option value="clothing">Clothing/Jewelry</option>
+							<option value="shopping">Shopping</option>
+					</select></td>
+				</tr>
+				<tr>
+					<td>Payment Method:</td>
+					<td><select name="payment">
+							<option value="cash">Cash</option>
+							<option value="debit">Debit</option>
+							<option value="credit">Credit</option>
+							<option value="check">Check</option>
+					</select></td>
+				</tr>
+				<tr>
+					<td><input type="submit" value="Upload" /></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</body>
+</html>
