@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.berina.expensereports.database;
+package com.berina.expensereports.config.db;
 
 import javax.sql.DataSource;
 

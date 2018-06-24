@@ -3,8 +3,70 @@
 <head>
 <meta charset="UTF-8">
 <title>Expense Reports - View</title>
-</head>
-<body>
+<link type="text/css" rel="stylesheet" href="css/style.css">
+<script>
+	function populateValues() {
 
+		var paymentTypesText = [ "Cash", "Check", "Credit", "Debit" ];
+		var categoryTypesText = [ "Grocery", "Restaurants", "Clothing",
+				"Shopping" ];
+		var filterSel = document.getElementById("filter");
+		var filter = filterSel.options[filterSel.selectedIndex].value;
+		var values = document.getElementById("value");
+		//values.empty();
+		for (var i = values.length - 1; i >= 0; i--) {
+			values.remove(i);
+		}
+		if (filter == "category") {
+			for (var i = 0; i < categoryTypesText.length; i++) {
+				var el = document.createElement("option");
+				el.text = categoryTypesText[i];
+				el.value = categoryTypesText[i];
+				values.appendChild(el);
+			}
+		} else {
+			for (var i = 0; i < paymentTypesText.length; i++) {
+				var el = document.createElement("option");
+				el.text = paymentTypesText[i];
+				el.value = paymentTypesText[i];
+				values.appendChild(el);
+			}
+		}
+	}
+</script>
+</head>
+<body onload="populateValues()">
+<div><h1>Expense Reports - View Reports</h1></div>
+	<form action="/view" method="POST">
+		<table>
+			<tr>
+				<td>Filter By:</td>
+				<td><select name="filter" id="filter" onload="populateValues()"
+					onchange="populateValues()">
+						<option value="category">Category</option>
+						<option value="payment">Payment Type</option>
+				</select></td>
+				<td>Value:</td>
+				<td><select name="value" id="value">
+				</select></td>
+			</tr>
+			<tr>
+				<td><input type="submit"></td>
+			</tr>
+		</table>
+		<h2>Report</h2>
+		<table class="tables" border="1">
+			<tr>
+				<th>Category</th>
+				<th>Payment Method</th>
+				<th>Receipt</th>
+			</tr>
+			<tr th:each="receipt: ${receipts}">
+				<td th:text="${receipt.category}"></td>
+				<td th:text="${receipt.payment}"></td>
+				<td th:text="${receipt.file}"></td>
+			</tr>
+		</table>
+	</form>
 </body>
 </html>

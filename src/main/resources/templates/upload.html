@@ -2,14 +2,16 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <title>Upload Receipt</title>
+<link type="text/css" rel="stylesheet" href="css/style.css">
 </head>
 <body>
+<div><h1>Expense Reports - Upload Receipt</h1></div>
 	<div>
 		<form method="POST" action="/upload" enctype="multipart/form-data">
 			<table>
 				<tr>
 					<td>File to upload:</td>
-					<td><input type="file" name="file" /></td>
+					<td><input type="file" name="file" id="file" /></td>
 				</tr>
 				<tr>
 					<td>Category:</td>

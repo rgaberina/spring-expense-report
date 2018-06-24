@@ -21,18 +21,6 @@ import com.berina.expensereports.model.ReceiptModel;
 @Controller
 public class UploadController {
 
-	@RequestMapping("/login")
-	public String login() {
-		return "login";
-	}
-
-	@GetMapping("/")
-	@Secured("USER")
-	public String index() {
-		System.out.println("In index");
-		return "home";
-	}
-
 	@Secured("USER")
 	@GetMapping(value="/upload")
 	public String uploadReceiptForm() {
@@ -46,18 +34,11 @@ public class UploadController {
 			@RequestParam("category") String category,
 			@RequestParam("payment") String payment,
 			RedirectAttributes redirectAttributess) {
+		System.out.println("In uploadReceiptForm post");
 		ReceiptModel receipt = new ReceiptModel();
 		receipt.setCategory(category);
-		receipt.setFile(file);
+		//receipt.setFile(file);
 		receipt.setPayment(payment);
 		return "home";
 	}
-
-	@Secured("USER")
-	@RequestMapping("/view")
-	public String viewReports() {
-		System.out.println("In view");
-		return "/view";
-	}
-
 }

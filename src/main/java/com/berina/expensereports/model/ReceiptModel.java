@@ -8,8 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-import org.springframework.web.multipart.MultipartFile;
-
 /**
  * @author berina
  *
@@ -22,7 +20,10 @@ public class ReceiptModel {
 	private Long iD;
 	
 	@Column
-	private MultipartFile file;
+	private String username;
+	
+	@Column
+	private String file;
 	
 	@Column
 	private String category;
@@ -30,11 +31,19 @@ public class ReceiptModel {
 	@Column
 	private String payment;
 	
-	public MultipartFile getFile() {
+	public String getUsername() {
+		return username;
+	}
+	
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	
+	public String getFile() {
 		return file;
 	}
 	
-	public void setFile(MultipartFile file) {
+	public void setFile(String file) {
 		this.file = file;
 	}
 	
