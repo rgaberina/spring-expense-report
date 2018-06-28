@@ -6,7 +6,7 @@ package com.berina.expensereports.dao;
 import java.util.List;
 import java.util.Map;
 
-import com.berina.expensereports.model.ReceiptModel;
+import com.berina.expensereports.model.Receipt;
 
 /**
  * @author berina
@@ -14,10 +14,10 @@ import com.berina.expensereports.model.ReceiptModel;
  */
 public interface ReceiptDao {
 	
-	public List<ReceiptModel>  getAllReceiptsByUser(String username);
+	public List<Receipt>  getAllReceiptsByUser(String username);
 	
-	public List<ReceiptModel> getReceiptsByUserFilter(String username, Map<String, Object> params);
+	public List<Receipt> getReceiptsByUserFilter(String username, Map<String, Object> params);
 	
-	
+	public void save(Receipt receipt);
 
 }

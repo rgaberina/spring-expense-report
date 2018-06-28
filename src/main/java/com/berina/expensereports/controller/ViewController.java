@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.berina.expensereports.dao.ReceiptDao;
-import com.berina.expensereports.model.ReceiptModel;
+import com.berina.expensereports.model.Receipt;
 
 /**
  * @author berina
@@ -51,7 +51,7 @@ public class ViewController {
 	@Secured("USER")
 	@RequestMapping("/view")
 	public String viewReceipts(Model model) {
-		List<ReceiptModel> receipts = receiptDao.getAllReceiptsByUser("user1");
+		List<Receipt> receipts = receiptDao.getAllReceiptsByUser("user1");
 		model.addAttribute("receipts", receipts);
 		return "/view";
 	}
@@ -63,7 +63,7 @@ public class ViewController {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put(filter, value);
 		params.put("username", "user1");
-		List<ReceiptModel> receipts = receiptDao.getReceiptsByUserFilter("user1", params);
+		List<Receipt> receipts = receiptDao.getReceiptsByUserFilter("user1", params);
 		model.addAttribute("receipts", receipts);
 		return "/view";
 	}

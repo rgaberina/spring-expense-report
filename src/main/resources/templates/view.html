@@ -64,7 +64,7 @@
 			<tr th:each="receipt: ${receipts}">
 				<td th:text="${receipt.category}"></td>
 				<td th:text="${receipt.payment}"></td>
-				<td th:text="${receipt.file}"></td>
+				<td><a th:href="@{/{path}(path=${receipt.file})}">Receipt</a></td>
 			</tr>
 		</table>
 	</form>

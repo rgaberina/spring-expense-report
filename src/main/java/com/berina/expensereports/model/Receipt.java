@@ -5,7 +5,6 @@ package com.berina.expensereports.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 /**
@@ -13,10 +12,10 @@ import javax.persistence.Id;
  *
  */
 @Entity
-public class ReceiptModel {
+public class Receipt {
 	
 	@Id
-	@GeneratedValue
+	@Column
 	private Long iD;
 	
 	@Column
@@ -61,6 +60,16 @@ public class ReceiptModel {
 	
 	public void setPayment(String payment) {
 		this.payment = payment;
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder str = new StringBuilder();
+		str.append(this.getUsername() + " ");
+		str.append(this.getFile() + " ");
+		str.append(this.getCategory() + " ");
+		str.append(this.getPayment());
+		return str.toString();
 	}
 
 }

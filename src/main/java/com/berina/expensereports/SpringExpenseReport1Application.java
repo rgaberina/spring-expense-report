@@ -11,7 +11,8 @@ import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 
 @SpringBootApplication
 public class SpringExpenseReport1Application {
-
+	
+	
 	public static void main(String[] args) {
 		SpringApplication.run(SpringExpenseReport1Application.class, args);
 	}	
@@ -26,6 +27,9 @@ public class SpringExpenseReport1Application {
 			.addScript("db/sql/create-db.sql")
 			.addScript("db/sql/insert-data.sql")
 			.build();
+		//addUsers();
 		return db;
 	}
+	
+	
 }
