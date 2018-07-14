@@ -12,6 +12,9 @@ h1,h2{
 }
 th, td {
 	padding: 3px;
-	text-align: left;
-	height: 10px;
+	text-align: center;
+}
+input {
+	height: 100px;
+	width: 200px;
 }

@@ -24,6 +24,9 @@ public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private MyBasicAuthenticationEntryPoint authenticationEntryPoint;
+	
+	@Autowired
+	private DataSource datasource;
 
 	/*@Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
@@ -32,7 +35,7 @@ public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
           .authorities("USER");
     }*/
 
-	@Autowired
+	/*@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth, DataSource dataSource) throws Exception {      
 		auth.jdbcAuthentication().dataSource(dataSource)
 			.usersByUsernameQuery("select username, password, 1 from user where username = ?")
@@ -40,6 +43,22 @@ public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
 					+ "ON u.username = user_roles.username JOIN Role on user_roles.roles_Id = role.id "
 					+ "WHERE u.username = ? ").passwordEncoder(new BCryptPasswordEncoder());
 
+	}*/
+	
+	@Autowired
+	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+	    auth.userDetailsService(userDetailsService()).passwordEncoder(new BCryptPasswordEncoder());
+	    auth.jdbcAuthentication().dataSource(datasource);
+	}
+	
+	@Autowired
+	public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
+		
+	  auth.jdbcAuthentication().dataSource(datasource)
+		.usersByUsernameQuery(
+			"select username,password, enabled from user where username=?")
+		.authoritiesByUsernameQuery(
+			"select username, roleID from user_roles where username=?");
 	}
 
 	@Override

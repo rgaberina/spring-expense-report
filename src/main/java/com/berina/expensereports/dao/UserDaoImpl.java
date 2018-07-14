@@ -47,12 +47,11 @@ public class UserDaoImpl implements UserDao {
 	@Modifying
 	public void save(User user) {
 		StringBuilder sql = new StringBuilder();
-		sql.append("INSERT INTO user (username, password) "
-				+ "VALUES (:username,:password)");
+		sql.append("INSERT INTO user (username, password, enabled) "
+				+ "VALUES (:username,:password,1)");
 		Map<String, Object> paramMap = new HashMap<>();
 		paramMap.put("username", user.getUsername());
 		paramMap.put("password", user.getPassword());
-		System.out.println(user.getPassword());
 		namedParameterJdbcTemplate.update(sql.toString(), paramMap);
 	}
 	

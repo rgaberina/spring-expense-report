@@ -9,6 +9,8 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -51,7 +53,10 @@ public class ViewController {
 	@Secured("USER")
 	@RequestMapping("/view")
 	public String viewReceipts(Model model) {
-		List<Receipt> receipts = receiptDao.getAllReceiptsByUser("user1");
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    String name = auth.getName();
+	    System.out.println(name);
+		List<Receipt> receipts = receiptDao.getAllReceiptsByUser(name);
 		model.addAttribute("receipts", receipts);
 		return "/view";
 	}

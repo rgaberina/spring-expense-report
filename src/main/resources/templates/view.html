@@ -51,15 +51,15 @@
 				</select></td>
 			</tr>
 			<tr>
-				<td><input type="submit"></td>
+				<td colspan="4"><input type="submit"></td>
 			</tr>
 		</table>
 		<h2>Report</h2>
-		<table class="tables" border="1">
+		<table class="tables" border="1" width=75%>
 			<tr>
-				<th>Category</th>
-				<th>Payment Method</th>
-				<th>Receipt</th>
+				<th width=20%>Category</th>
+				<th width=20%>Payment Method</th>
+				<th width=60%>Receipt</th>
 			</tr>
 			<tr th:each="receipt: ${receipts}">
 				<td th:text="${receipt.category}"></td>

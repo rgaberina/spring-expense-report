@@ -9,14 +9,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
 
 import com.berina.expensereports.model.Receipt;
@@ -30,10 +26,8 @@ public class ReceiptDaoImpl implements ReceiptDao {
 	
 	NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 	
-	@PersistenceContext
-    private EntityManager entityManager;
-	
-	private static int maxID = -1;
+//	@PersistenceContext
+//    private EntityManager entityManager;
 	
 	@Autowired
 	public void setNamedParameterJdbcTemplate(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {

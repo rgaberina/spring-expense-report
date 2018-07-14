@@ -8,7 +8,8 @@ CREATE TABLE receipt (
 	
 CREATE TABLE user (
 	username VARCHAR(30) PRIMARY KEY,
-	password VARCHAR(100)
+	password VARCHAR(100),
+	enabled INTEGER
 	);
 	
 CREATE TABLE user_roles (
