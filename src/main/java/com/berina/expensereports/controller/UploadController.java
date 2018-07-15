@@ -60,7 +60,7 @@ public class UploadController {
 			path.toFile().createNewFile();
 			path = Files.write(path, bytes);
 			String pathString = path.toString();
-			String filePath = pathString.substring(pathString.indexOf("/Receipts/"), pathString.length());
+			String filePath = pathString.substring(pathString.indexOf("Receipts/"), pathString.length());
 			receipt.setFile(filePath);
 		} catch(IOException e) {
 			System.out.println(e.getMessage());

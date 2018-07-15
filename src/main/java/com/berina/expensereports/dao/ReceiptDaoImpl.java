@@ -9,6 +9,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.jdbc.core.RowMapper;
@@ -26,8 +29,10 @@ public class ReceiptDaoImpl implements ReceiptDao {
 	
 	NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 	
-//	@PersistenceContext
-//    private EntityManager entityManager;
+	@PersistenceContext
+    private EntityManager entityManager;
+	
+	private static int maxID = -1;
 	
 	@Autowired
 	public void setNamedParameterJdbcTemplate(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
@@ -43,9 +48,6 @@ public class ReceiptDaoImpl implements ReceiptDao {
 		params.put("username", username);
 		String sql = "SELECT * FROM receipt WHERE username=:username";
 		List<Receipt> result = namedParameterJdbcTemplate.query(sql, params, new ReceiptMapper());
-		for (Receipt r: result) {
-			System.out.println(r);
-		}
 		return result;
 	}
 	
@@ -73,14 +75,6 @@ public class ReceiptDaoImpl implements ReceiptDao {
 		paramMap.put("category", receipt.getCategory());
 		paramMap.put("payment", receipt.getPayment());
 		namedParameterJdbcTemplate.update(sql.toString(), paramMap);
-		/*sql = new StringBuilder();
-		sql.append("SELECT * FROM receipt where username=:username AND file=:file AND "
-				+ "category=:category AND payment=:payment");
-		List<ReceiptModel> res = namedParameterJdbcTemplate.query(sql.toString(), new ReceiptMapper());
-		if(res == null || res.isEmpty())
-			System.out.println("Nothing inserted");
-		else
-			System.out.println(res.get(0));*/
 	}
 	
 	private static final class ReceiptMapper implements RowMapper<Receipt> {

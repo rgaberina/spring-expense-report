@@ -6,15 +6,22 @@ table{
 .tables {
 	width: 60%;
 	border: 1px;
+	text-align: center;
 }
 h1,h2{
 	text-align: center;
 }
 th, td {
 	padding: 3px;
-	text-align: center;
+	text-align: left;
 }
 input {
-	height: 100px;
 	width: 200px;
+}
+.header{
+	background-color: rgba(192,192,192,0.9);;
+	 border-radius: 25px;
+}
+.body{
+	background-color: rgba(192,192,192,0.3);;
 }

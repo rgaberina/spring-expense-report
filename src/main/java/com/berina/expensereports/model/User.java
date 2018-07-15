@@ -16,6 +16,9 @@ public class User {
 	
 	@Column
 	private String password;
+	
+	@Column
+	private int enabled;
 
 	public String getUsername() {
 		return username;
@@ -31,5 +34,13 @@ public class User {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public int getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(int enabled) {
+		this.enabled = enabled;
 	}
 }

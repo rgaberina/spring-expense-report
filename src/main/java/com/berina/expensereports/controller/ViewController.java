@@ -65,10 +65,12 @@ public class ViewController {
 	@PostMapping("/view")
 	public String viewReceiptsFilter(@RequestParam("filter") String filter, 
 			@RequestParam("value") String value, Model model) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    String name = auth.getName();
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put(filter, value);
-		params.put("username", "user1");
-		List<Receipt> receipts = receiptDao.getReceiptsByUserFilter("user1", params);
+		params.put("username", name);
+		List<Receipt> receipts = receiptDao.getReceiptsByUserFilter(name, params);
 		model.addAttribute("receipts", receipts);
 		return "/view";
 	}

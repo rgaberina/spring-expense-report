@@ -5,6 +5,8 @@ package com.berina.expensereports.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 /**
@@ -15,7 +17,7 @@ import javax.persistence.Id;
 public class Receipt {
 	
 	@Id
-	@Column
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long iD;
 	
 	@Column
@@ -60,6 +62,14 @@ public class Receipt {
 	
 	public void setPayment(String payment) {
 		this.payment = payment;
+	}
+	
+	public void setID(Long id) {
+		this.iD = id;
+	}
+	
+	public Long getId() {
+		return iD;
 	}
 	
 	@Override
