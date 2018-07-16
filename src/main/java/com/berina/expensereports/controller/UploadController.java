@@ -8,6 +8,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
@@ -26,14 +28,16 @@ import com.berina.expensereports.model.Receipt;
 @Controller
 public class UploadController {
 	
+	private static final Logger LOGGER = LoggerFactory.getLogger(UploadController.class);
+	
 	@Autowired
 	private ReceiptDao receiptDao;
 	
 	@Secured("USER")
 	@GetMapping(value="/upload")
 	public String uploadReceiptForm() {
-		System.out.println("In uploadReceiptForm");
-		return "/upload";
+		LOGGER.debug("In uploadReceiptForm");
+		return "upload";
 	}
 
 	@Secured("USER")
@@ -42,11 +46,13 @@ public class UploadController {
 			@RequestParam("category") String category,
 			@RequestParam("payment") String payment,
 			RedirectAttributes redirectAttributess) {
-		System.out.println("In uploadReceiptForm post");
+		LOGGER.debug("In uploadReceiptForm post");
+		
 		Receipt receipt = new Receipt();
 		receipt.setCategory(category);
 		Path path = Paths.get(System.getProperty("user.dir") 
 				+ "/src/main/resources/static/Receipts/" + file.getOriginalFilename());
+		
 		if(path.toFile().exists()) {
 			String fileName = file.getOriginalFilename();
 			fileName = fileName.substring(0, fileName.indexOf(".")) + "_1" 
@@ -54,16 +60,19 @@ public class UploadController {
 			path = Paths.get(System.getProperty("user.dir") 
 					+ "/src/main/resources/static/Receipts/" + fileName);
 		}
+		
 		try {
 			byte[] bytes = file.getBytes();
-			System.out.println(path.toString());
+			
+			LOGGER.info("Path: {}" , path.toString());
+			
 			path.toFile().createNewFile();
 			path = Files.write(path, bytes);
 			String pathString = path.toString();
 			String filePath = pathString.substring(pathString.indexOf("Receipts/"), pathString.length());
 			receipt.setFile(filePath);
 		} catch(IOException e) {
-			System.out.println(e.getMessage());
+			LOGGER.error("Error occurred", e);
 		}
 		//System.out.println(path);
 		receipt.setPayment(payment);
